@@ -1,5 +1,10 @@
 package com.wangjiaming.expansion.readProperties;
 
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 
 /**
@@ -12,14 +17,32 @@ import java.util.ResourceBundle;
  **/
 public class PropertiesUtils {
 
-    public static String getProperties(String propertiesName,String key) {
+    public static String getProperties(String propertiesName, String key) {
         ResourceBundle rb = ResourceBundle.getBundle(propertiesName);
-        return rb.getString(key);
+        try {
+            return rb.getString(key);
+        } catch (Exception e) {
+            return null;
+        }
     }
 
-    public static void main(String[] args) {
-        System.out.println(PropertiesUtils.getProperties("application","logging.level.com.wonders.external"));
-    }
+    public static String getPropertiesByPath(String path, String key) {
+        String proFilePath = path;
+        String value=null;
+        try {
+            BufferedInputStream inputStream = new BufferedInputStream(new FileInputStream(proFilePath));
+            ResourceBundle rb = new PropertyResourceBundle(inputStream);
+            value= rb.getString(key);
+            inputStream.close();
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return value;
 
+    }
 
 }
