@@ -1,4 +1,4 @@
-package com.wangjiaming.expansion.validation;
+package com.expansion.validation;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

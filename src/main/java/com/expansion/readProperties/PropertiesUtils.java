@@ -1,4 +1,4 @@
-package com.wangjiaming.expansion.readProperties;
+package com.expansion.readProperties;
 
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
@@ -26,6 +26,12 @@ public class PropertiesUtils {
         }
     }
 
+    /**
+     * 绝对路径获取配置文件内容
+     * @param path
+     * @param key
+     * @return
+     */
     public static String getPropertiesByPath(String path, String key) {
         String proFilePath = path;
         String value=null;
@@ -34,12 +40,8 @@ public class PropertiesUtils {
             ResourceBundle rb = new PropertyResourceBundle(inputStream);
             value= rb.getString(key);
             inputStream.close();
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+        }catch (Exception e){
+
         }
         return value;
 
