@@ -8,5 +8,11 @@
     <artifactId>expansion-utils</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>5.1.7.RELEASE</version>
+        </dependency>
+    </dependencies>
 </project>
