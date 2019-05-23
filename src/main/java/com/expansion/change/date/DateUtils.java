@@ -23,8 +23,13 @@ public class DateUtils {
         }
     }
 
+    public static String getFormateDate(String format) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format);
+        return simpleDateFormat.format(new Date());
+    }
+
     public static void main(String[] args) {
-        System.out.println(DateUtils.strChangeDate("2019-09-01","yyyy-MM-dd"));
+        System.out.println(DateUtils.getFormateDate("yyyyMMdd"));
     }
 
 }
