@@ -2,7 +2,10 @@
 
 ### 校验工具
 - 类校验    com.expansion.validation.ValiClazz
-- 日期校验  com.expansion..validation.ValiDate
+
+
+
+- 日期校验  com.expansion.validation.ValiDate
 
 ### 读取properties工具类
 - 读取properties com.expansion.readProperties.PropertiesUtils
