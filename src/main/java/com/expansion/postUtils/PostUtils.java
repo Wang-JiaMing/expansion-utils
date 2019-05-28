@@ -1,6 +1,5 @@
 package com.expansion.postUtils;
 
-import javafx.geometry.Pos;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;

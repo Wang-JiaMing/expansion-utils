@@ -1,4 +1,4 @@
-package com.expansion.change.object;
+package com.expansion.object;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -49,6 +49,30 @@ public class ObjectUtils {
             }
         }
         return params;
+    }
+
+    /**
+     * 遍历对象所有入参去两边空格
+     * @param o
+     * @return
+     */
+    public static Object trimMethods(Object o) throws Exception{
+        Class<?> clazz=o.getClass();
+        Method[] methods = clazz.getDeclaredMethods();
+        for(int i=0;i<methods.length;i++){
+            if(methods[i].getName().indexOf("get")!=-1){
+                String methodsName=methods[i].getName().split("get")[1];
+                String value = String.valueOf(methods[i].invoke(o)).trim();
+                for(int j=0;j<methods.length;j++){
+                    if(methods[j].getName().indexOf("set"+methodsName)!=-1){
+                        methods[j].setAccessible(true);
+                        methods[j].invoke(o,value);
+                        break;
+                    }
+                }
+            }
+        }
+        return o;
     }
 
 }

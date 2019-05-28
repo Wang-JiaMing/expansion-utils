@@ -23,11 +23,15 @@ public class StringUtils {
      *
      * @return String 随机字符串
      */
-    public static String generateNonceStr() {
-        char[] nonceChars = new char[32];
+    public static String generateNonceStr(Integer length) {
+        if(length==null){
+            length=32;
+        }
+        char[] nonceChars = new char[length];
         for (int index = 0; index < nonceChars.length; ++index) {
             nonceChars[index] = SYMBOLS.charAt(RANDOM.nextInt(SYMBOLS.length()));
         }
         return new String(nonceChars);
     }
+
 }
