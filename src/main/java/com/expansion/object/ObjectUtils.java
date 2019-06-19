@@ -16,13 +16,13 @@ import java.util.Map;
 public class ObjectUtils {
 
     /**
-     * 去对象化
+     * 去对象化带下横线（非驼峰命名）
      *
      * @param o
      * @return
      */
-    public static Map<String, String> ObjectChangeMap(Object o) {
-        Map<String, String> params = new HashMap<String, String>();
+    public static Map<String, Object> ObjectChangeMapToLine(Object o) {
+        Map<String, Object> params = new HashMap<String, Object>();
         Class<?> clazz = o.getClass();
         Field[] fields = clazz.getDeclaredFields();
         for (Field field : fields) {
@@ -44,6 +44,48 @@ public class ObjectUtils {
                 if (value != null && !"".equals(value)) {
                     params.put(dataFiledName.toString(), value);
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return params;
+    }
+
+    /**
+     * 去对象化（驼峰命名）
+     *
+     * @param o
+     * @return
+     */
+    public static Map<String, Object> ObjectChangeMap(Object o) {
+        Map<String, Object> params = new HashMap<String, Object>();
+        Class<?> clazz = o.getClass();
+        Field[] fields = clazz.getDeclaredFields();
+        Field[] fieldSupers=clazz.getSuperclass().getDeclaredFields();
+        for (Field field : fields) {
+            StringBuffer dataFiledName = new StringBuffer();
+            String[] filedName = field.toString().split(" ")[2].split("\\.");
+            char[] charFiledName = filedName[filedName.length - 1].toCharArray();
+            String tmpGetName = filedName[filedName.length - 1];
+            String getNameMethod = "get" + (char) (tmpGetName.substring(0, 1).toCharArray()[0] - 32) + filedName[filedName.length - 1].substring(1, tmpGetName.length());
+            try {
+                Method methods = clazz.getDeclaredMethod(getNameMethod, null);
+                String value = String.valueOf(methods.invoke(o));
+                params.put(String.valueOf(charFiledName),value.equals("null")?null:value);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        for (Field field : fieldSupers) {
+            StringBuffer dataFiledName = new StringBuffer();
+            String[] filedName = field.toString().split(" ")[2].split("\\.");
+            char[] charFiledName = filedName[filedName.length - 1].toCharArray();
+            String tmpGetName = filedName[filedName.length - 1];
+            String getNameMethod = "get" + (char) (tmpGetName.substring(0, 1).toCharArray()[0] - 32) + filedName[filedName.length - 1].substring(1, tmpGetName.length());
+            try {
+                Method methods = clazz.getSuperclass().getDeclaredMethod(getNameMethod, null);
+                String value = String.valueOf(methods.invoke(o));
+                params.put(String.valueOf(charFiledName),value.equals("null")?null:value);
             } catch (Exception e) {
                 e.printStackTrace();
             }

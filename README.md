@@ -1,7 +1,7 @@
 # 扩展工具类
 - author:wangjiaming
 - lastUpdateDate:20190528
-- version:2.0
+- version:2.1
 ## 日期转换工具类
 #### 1. 字符日期转Date类型
 - com.expansion.date.DateUtils

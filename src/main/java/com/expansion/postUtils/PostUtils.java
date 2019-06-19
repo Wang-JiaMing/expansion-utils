@@ -56,24 +56,10 @@ public class PostUtils {
 
     public static void main(String[] args) {
         Map<String,String> stringMap=new HashMap<String, String>();
-        stringMap.put("WONDERS","946C67AE6F7F4EE693C9BBF4563DED21");
         String json="{\n" +
-                "    \"orgCode\": \"34094558\",\n" +
-                "    \"orgName\": \"广州市越秀区光塔街社区卫生服务中心\",\n" +
-                "    \"orderType\":\"0\",\n" +
-                "    \"idNumber\": \"440100000000000000\",\n" +
-                "    \"name\": \"小明同学\",\n" +
-                "    \"hospOutTradeNo\":\"001\",\n" +
-                "    \"totalFee\": \"1\",\n" +
-                "    \"cashFee\": \"1\",\n" +
-                "    \"body\": \"诊查费\",\n" +
-                "    \"payType\": \"1\",\n" +
-                "    \"insuranceFee\": \"0\",\n" +
-                "    \"serialNo\": \"\",\n" +
-                "    \"orgNo\": \"\",\n" +
-                "    \"gmtOutCreate\": \"2018-01-01 01:01:01\",\n" +
-                "    \"billNo\": \"\"\n" +
+                "\t\"institutionCode\":\"001\",\n" +
+                "\t\"postCode\":\"001\"\n" +
                 "}";
-        PostUtils.postJsonToUrl("http://localhost:3737/external/wx/pushmessage",stringMap,json);
+        System.out.println(PostUtils.postJsonToUrl("http://localhost:8899/manage/managePost/checkAuth",stringMap,json));
     }
 }
