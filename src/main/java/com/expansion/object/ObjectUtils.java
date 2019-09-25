@@ -2,9 +2,7 @@ package com.expansion.object;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -101,29 +99,29 @@ public class ObjectUtils {
      * @param o
      * @return
      */
-    public static Object trimMethods(Object o) throws Exception {
-        Class<?> clazz = o.getClass();
-        Method[] methods = clazz.getDeclaredMethods();
-        for (int i = 0; i < methods.length; i++) {
-            if (methods[i].getName().indexOf("get") != -1) {
-                if (methods[i].getReturnType().getName().indexOf("List") == -1 && methods[i].getReturnType().getName().indexOf("Set") == -1 && methods[i].getReturnType().getName().indexOf("Map") == -1) {
-                    String methodsName = methods[i].getName().split("get")[1];
-                    String value = String.valueOf(methods[i].invoke(o)).trim();
-                    for (int j = 0; j < methods.length; j++) {
-                        if (methods[j].getName().indexOf("set" + methodsName) != -1) {
-                            methods[j].setAccessible(true);
-                            methods[j].invoke(o, value);
-                            break;
+    public static Object trimMethods(Object o){
+        try {
+            Class<?> clazz = o.getClass();
+            Method[] methods = clazz.getDeclaredMethods();
+            for (int i = 0; i < methods.length; i++) {
+                if (methods[i].getName().indexOf("get") != -1) {
+                    if (methods[i].getReturnType().getName().indexOf("List") == -1 && methods[i].getReturnType().getName().indexOf("Set") == -1 && methods[i].getReturnType().getName().indexOf("Map") == -1) {
+                        String methodsName = methods[i].getName().split("get")[1];
+                        String value = String.valueOf(methods[i].invoke(o)).trim();
+                        for (int j = 0; j < methods.length; j++) {
+                            if (methods[j].getName().indexOf("set" + methodsName) != -1) {
+                                methods[j].setAccessible(true);
+                                methods[j].invoke(o, value);
+                                break;
+                            }
                         }
                     }
                 }
             }
+            return o;
+        }catch (Exception e){
+            return null;
         }
-        return o;
-    }
-
-    public static void main(String[] args) throws Exception {
-
     }
 
 
