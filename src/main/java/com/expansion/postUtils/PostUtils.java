@@ -56,10 +56,7 @@ public class PostUtils {
 
     public static void main(String[] args) {
         Map<String,String> stringMap=new HashMap<String, String>();
-        String json="{\n" +
-                "\t\"institutionCode\":\"001\",\n" +
-                "\t\"postCode\":\"001\"\n" +
-                "}";
-        System.out.println(PostUtils.postJsonToUrl("http://localhost:8899/manage/managePost/checkAuth",stringMap,json));
+
+        System.out.println(PostUtils.postJsonToUrl("http://www.baidu.com",stringMap,null));
     }
 }

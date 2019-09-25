@@ -29,7 +29,8 @@ public class DateUtils {
     }
 
     public static void main(String[] args) {
-        System.out.println(DateUtils.getFormateDate("yyyyMMdd"));
+       Date test= DateUtils.strChangeDate("2019-08-29 9:30:00","yyyy-MM-dd HH:mm:ss");
+        System.out.println(System.currentTimeMillis()-test.getTime()%(1000 * 24 * 60 * 60)/(1000 * 60 * 60));
     }
 
 }

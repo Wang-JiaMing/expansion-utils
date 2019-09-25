@@ -105,8 +105,8 @@ public class ObjectUtils {
         Class<?> clazz = o.getClass();
         Method[] methods = clazz.getDeclaredMethods();
         for (int i = 0; i < methods.length; i++) {
-            if (methods[i].getReturnType().getName().indexOf("List") != -1 || methods[i].getReturnType().getName().indexOf("Set") != -1 || methods[i].getReturnType().getName().indexOf("Map") != -1) {
-                if (methods[i].getName().indexOf("get") != -1) {
+            if (methods[i].getName().indexOf("get") != -1) {
+                if (methods[i].getReturnType().getName().indexOf("List") == -1 && methods[i].getReturnType().getName().indexOf("Set") == -1 && methods[i].getReturnType().getName().indexOf("Map") == -1) {
                     String methodsName = methods[i].getName().split("get")[1];
                     String value = String.valueOf(methods[i].invoke(o)).trim();
                     for (int j = 0; j < methods.length; j++) {

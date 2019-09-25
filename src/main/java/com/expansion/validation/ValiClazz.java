@@ -21,19 +21,24 @@ public class ValiClazz {
      * @param notValidationMethods 排除不校验的get方法名
      * @return 全满足非空返回true,否者false
      */
-    public static boolean ClazzNotEmtry(Object o, List<String> notValidationMethods) throws Exception {
-        Class<?> clazz = o.getClass();
-        Method[] methods = clazz.getDeclaredMethods();
-        for (int i = 0; i < methods.length; i++) {
-            if (methods[i].getName().indexOf("get") != -1 && !notValidationMethods.contains(methods[i].getName())) {
-                String value = String.valueOf(methods[i].invoke(o));
-                if (value.equals("null") || "".equals(value)) {
-                    System.out.println(methods[i].getName() + "方法存在空值，校验失败");
-                    return false;
+    public static boolean ClazzNotEmtry(Object o, List<String> notValidationMethods) {
+        try {
+            Class<?> clazz = o.getClass();
+            Method[] methods = clazz.getDeclaredMethods();
+            for (int i = 0; i < methods.length; i++) {
+                if (methods[i].getName().indexOf("get") != -1 && !notValidationMethods.contains(methods[i].getName())) {
+                    String value = String.valueOf(methods[i].invoke(o));
+                    if (value.equals("null") || "".equals(value)) {
+                        System.out.println(methods[i].getName() + "方法存在空值，校验失败");
+                        return false;
+                    }
                 }
             }
+            return true;
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
         }
-        return true;
     }
 
     /**
@@ -44,11 +49,16 @@ public class ValiClazz {
      * @return 存在返回true，不存在范围false
      * @throws Exception
      */
-    public static boolean ClazzMethodRange(Object o, String method, List<String> range) throws Exception {
-        Class<?> clazz = o.getClass();
-        Method method1 = clazz.getMethod(method);
-        String value=String.valueOf(method1.invoke(o));
-        return range.contains(value);
+    public static boolean ClazzMethodRange(Object o, String method, List<String> range) {
+        try {
+            Class<?> clazz = o.getClass();
+            Method method1 = clazz.getMethod(method);
+            String value = String.valueOf(method1.invoke(o));
+            return range.contains(value);
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
     }
 
 
