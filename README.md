@@ -1,7 +1,6 @@
 # 扩展工具类
 - author:wangjiaming
-- lastUpdateDate:20190528
-- version:2.1
+- version:2020.2.3.1
 ## 日期转换工具类
 #### 1. 字符日期转Date类型
 - com.expansion.date.DateUtils
@@ -95,3 +94,9 @@
 - boolean dateFormat(String str,String formatStr)<br>
 > 入参1:等待校验的日期字符串
 > 入参2:规定的日期格式；例如:"yyyy-MM-dd"
+
+## excel转List方法
+- com.expansion.excel
+- List excelChangeMap(MultipartFile file)
+> 入参1:传入上传的file进行excel识别并转类型
+

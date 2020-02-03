@@ -6,9 +6,15 @@
 
     <groupId>com.expkit</groupId>
     <artifactId>expansion-utils</artifactId>
-    <version>2.12</version>
+    <version>2020.2.3.1</version>
 
     <dependencies>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>4.1.1</version>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
