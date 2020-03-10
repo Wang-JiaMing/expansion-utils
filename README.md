@@ -1,6 +1,6 @@
 # 扩展工具类
 - author:wangjiaming
-- version:2020.2.3.1
+- version:2020.3.10.1
 ## 日期转换工具类
 #### 1. 字符日期转Date类型
 - com.expansion.date.DateUtils

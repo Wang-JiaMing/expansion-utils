@@ -16,6 +16,9 @@ import java.security.MessageDigest;
  **/
 public class FileUtils {
 
+
+
+
     public static void main(String[] args) {
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");

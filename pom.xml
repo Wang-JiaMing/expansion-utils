@@ -6,12 +6,24 @@
 
     <groupId>com.expkit</groupId>
     <artifactId>expansion-utils</artifactId>
-    <version>2020.2.3.1</version>
+    <version>2020.3.10.1</version>
 
     <dependencies>
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi</artifactId>
+            <version>4.1.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>4.1.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml-schemas</artifactId>
             <version>4.1.1</version>
         </dependency>
 
