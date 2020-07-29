@@ -54,9 +54,35 @@ public class PostUtils {
         return result;
     }
 
+    public static String postXmlToUrl(String url, Map<String,String> headersMap, String xmlStr) {
+        SimpleClientHttpRequestFactory httpRequestFactory = new SimpleClientHttpRequestFactory();
+        httpRequestFactory.setReadTimeout(30000);
+        httpRequestFactory.setConnectTimeout(5000);
+        List<HttpMessageConverter<?>> messageConverters = new ArrayList<HttpMessageConverter<?>>();
+        messageConverters.add(new ByteArrayHttpMessageConverter());
+        StringHttpMessageConverter stringHttpMessageConverter = new StringHttpMessageConverter(Charset.forName("UTF-8"));
+        messageConverters.add(stringHttpMessageConverter);
+        messageConverters.add(new ResourceHttpMessageConverter());
+        messageConverters.add(new SourceHttpMessageConverter());
+        messageConverters.add(new AllEncompassingFormHttpMessageConverter());
+        RestTemplate restTemplate = new RestTemplate(httpRequestFactory);
+        restTemplate.setMessageConverters(messageConverters);
+        HttpHeaders headers = new HttpHeaders();
+        MediaType type = MediaType.parseMediaType("application/xml; charset=UTF-8");
+        headers.setContentType(type);
+        headers.add("Accept", MediaType.APPLICATION_JSON.toString());
+        for (String key : headersMap.keySet()) {
+            System.out.println(key+"|"+headersMap.get(key));
+            headers.add(key,headersMap.get(key).toString());
+        }
+        HttpEntity<String> formEntity = new HttpEntity<String>(xmlStr, headers);
+        String result = restTemplate.postForObject(url, formEntity, String.class);
+        return result;
+    }
+
     public static void main(String[] args) {
         Map<String,String> stringMap=new HashMap<String, String>();
 
-        System.out.println(PostUtils.postJsonToUrl("http://www.baidu.com",stringMap,null));
+        System.out.println(PostUtils.postXmlToUrl("http://app.nsejk.org.cn/doReqToHis?service=getDeptInfo",stringMap,"<?xml version=\"1.0\" encoding=\"UTF-8\"?><req><hospitalId>2</hospitalId><deptId></deptId></req>"));
     }
 }

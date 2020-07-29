@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
 public class ValiNumber {
 
     public static Boolean isNumber(String str){
-        Pattern pattern = Pattern.compile("-?[0-9]+\\.?[0-9]+");//compile("-?[0-9]+\\.?[0-9]+");
+        Pattern pattern = Pattern.compile("^-?\\d+\\.?\\d*$");
         Matcher isNum = pattern.matcher(str);
         if (!isNum.matches()) {
             return false;
